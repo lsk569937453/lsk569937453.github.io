@@ -20,7 +20,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ddf4c36e-66bb-4c5b-8142-659f14ee671c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2013-12-24-categories.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2013-12-24-elements.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2013-12-24-link-post.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2013-12-24-long-title.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2013-12-24-tags.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2013-12-24-中文測試.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2013-12-24-日本語テスト.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2013-12-25-block.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2013-12-25-excerpts.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2013-12-26-images.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2014-02-16-Mathjax-with-jekyll.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2014-11-18-gallery-post.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2015-09-19-emoji-test.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2017-07-19-highlight-test.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2017-07-20-next-tutorial.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2020-09-18-druid-connect-fail.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2020-09-18-druid-connect-fail.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,6 +84,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="2031" y="258" width="670" height="676" key="search.everywhere.popup" timestamp="1600389061867">
