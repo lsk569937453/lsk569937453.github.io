@@ -91,7 +91,13 @@ blade create network loss --percent 90 --interface eth0 --remote-port 3022
 <!--![RUNOOB](../assets/images/druid-2.png) -->
 ![RUNOOB](https://lsk569937453.github.io/assets/images/druid-2.png)
 
-第一个线程是有问题的线程，所以卡在了socket的read上，相当于线程假死。这时候就算收到信号，由于卡在了read上，也无法创建连接了。
+第一个线程是有问题的线程,可以看到当前的线程状态是Runnable。java doc上是这么说Runnable状态的
+
+**处于 runnable 状态下的线程正在 Java 虚拟机中执行，但它可能正在等待来自于操作系统的其它资源，比如处理器。**  
+
+即当前的线程是在运行中的，一直执行socket.read。我们都知道socket是tcp协议栈的实现，在server异常关闭的情况下，会发送fin包/reset包，客户端收到这两种类型的包，才会关闭。那么问题肯定是故障
+时（mysql进程重启/网卡reset）时，client没收到包，就一直卡在这里了。
+
 
 第二个线程是正常的线程，一直在wait直到有信号将他唤醒来创建连接。
 

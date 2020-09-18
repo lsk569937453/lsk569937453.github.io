@@ -6,9 +6,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ddf4c36e-66bb-4c5b-8142-659f14ee671c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/_posts/2020-09-16-chaosBlade-command.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_posts/2020-09-17-connection-cannot-release.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2020-09-18-druid-connect-fail.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2020-09-18-druid-connect-fail.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,9 +132,9 @@
       <screen x="1440" y="23" width="1852" height="1057" />
     </state>
     <state x="2073" y="306" width="586" height="490" key="find.popup/1440.23.1852.1057/0.23.1440.877@1440.23.1852.1057" timestamp="1600394481888" />
-    <state x="2031" y="258" width="670" height="676" key="search.everywhere.popup" timestamp="1600412864175">
+    <state x="2031" y="258" width="670" height="676" key="search.everywhere.popup" timestamp="1600414502143">
       <screen x="1440" y="23" width="1852" height="1057" />
     </state>
-    <state x="2031" y="258" width="670" height="676" key="search.everywhere.popup/1440.23.1852.1057/0.23.1440.877@1440.23.1852.1057" timestamp="1600412864175" />
+    <state x="2031" y="258" width="670" height="676" key="search.everywhere.popup/1440.23.1852.1057/0.23.1440.877@1440.23.1852.1057" timestamp="1600414502143" />
   </component>
 </project>
