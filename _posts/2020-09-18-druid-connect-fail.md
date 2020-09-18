@@ -83,11 +83,13 @@ blade create network loss --percent 90 --interface eth0 --remote-port 3022
 ```
 由于我是在应用法机器上做的混沌实验，所以这里设置的是远程端口的丢包率，3022就是我mysql的机器的端口。  
 然后我们在用[阿尔萨斯](https://github.com/alibaba/arthas/blob/master/README_CN.md)  看一下具体的线程状态.  
-![RUNOOB](../assets/images/druid-1.png)
+<!--![RUNOOB](../assets/images/druid-1.png) -->
+![RUNOOB](https://lsk569937453.github.io/assets/images/druid-1.png)
 可以看到有两个Druid-ConnectionPool-Create 的线程，因为我们有两个db需要连接，所以有两个druid连接池，因此有两个创建连接的线程。  
 
 看一下两个线程的线程栈信息：
-![RUNOOB](../assets/images/druid-2.png)
+<!--![RUNOOB](../assets/images/druid-2.png) -->
+![RUNOOB](https://lsk569937453.github.io/assets/images/druid-2.png)
 
 第一个线程是有问题的线程，所以卡在了socket的read上，相当于线程假死。这时候就算收到信号，由于卡在了read上，也无法创建连接了。
 
