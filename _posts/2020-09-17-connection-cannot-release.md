@@ -4,6 +4,9 @@ description: 应用连接数据库中间件，数据库中间件连接mysql,mysq
 categories:
  - tutorial
 tags:
+- Mysql
+- Java
+
 ---
 ## 问题描述
 **应用连接数据库中间件，数据库中间件连接mysql,mysql故障后恢复正常，业务方无法恢复，报错如下**   

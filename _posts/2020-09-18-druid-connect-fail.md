@@ -4,6 +4,8 @@ description: mysql机器故障恢复后，druid需要重启才能恢复正常
 categories:
  - tutorial
 tags:
+- Mysql
+- Java
 ---
 ## 问题描述
 **应用底层通过druid连接mysql数据库，故障时mysql进程异常，值班运维执行了mysql进程重启，网卡reset

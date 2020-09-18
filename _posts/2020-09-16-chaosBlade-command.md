@@ -4,8 +4,7 @@ description: blade的相关指令
 categories:
  - tutorial
 tags:
-- consectetur
-description: Gallery Post Test. 测试图片类文章的显示。
+- Chaos
 ---
 ## 模拟网络故障
 ##### 禁止访问远端3022端口
