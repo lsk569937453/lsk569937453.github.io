@@ -68,7 +68,7 @@ at com.ly.dal.manager.TransactionContextManager.doGetRealConnection(TransactionC
 
 区别就在于：**故障机器一直没有socket的异常，无论是连接失败还是连接reset，都会抛出异常，而故障机器确没有。**
 由于业务方直接将应用重启了，没有现场，于是上网搜了一下有没有别人碰到这种错误，找到一篇类似的[博客](https://www.jianshu.com/p/3c85c9ddffd3)  。  
-##问题复现
+## 问题复现
 正常应用服务器通过druid连接mysql，复现场景如下：  
 1.断网。断开应用和mysql的联网，然后过一段时间重新连接，可以连上  
 2.重启mysql进程。  
@@ -95,7 +95,7 @@ blade create network loss --percent 90 --interface eth0 --remote-port 3022
 
 第二个线程是正常的线程，一直在wait直到有信号将他唤醒来创建连接。
 
-##源码分析
+## 源码分析  
 
 ```
 public class CreateConnectionThread extends Thread {
@@ -225,5 +225,5 @@ CreateConnectionThread的源码可以看到，为了避免在创建连接的时�
 ```
 jdbc:mysql://xx.xx.xx.xx:3027/xx?useUnicode=true&characterEncoding=utf8&autoReconnect=true
 ```
-##解决方案  
+## 解决方案  
 在设置druid连接池的时候设置一下**connectTimeout,socketTimeout**。
