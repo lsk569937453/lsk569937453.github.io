@@ -1,27 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BranchesTreeState">
-    <expand>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-    </expand>
+    <expand />
     <select />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ddf4c36e-66bb-4c5b-8142-659f14ee671c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/_posts/2020-09-18-tags" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/persion.jpeg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2020-09-18-druid-connect-fail.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2020-09-18-druid-connect-fail.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/_config.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +34,13 @@
   <component name="PropertiesComponent">
     <property name="ASKED_MARK_IGNORED_FILES_AS_EXCLUDED" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/assets/images" />
     <property name="settings.editor.selected.configurable" value="MavenSettings" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/assets/images" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -62,6 +56,31 @@
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
+        <entry key="1">
+          <value>
+            <State>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="roots">
+                    <value>
+                      <list>
+                        <option value="$PROJECT_DIR$" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
         <entry key="MAIN">
           <value>
             <State />
@@ -69,9 +88,26 @@
         </entry>
       </map>
     </option>
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="1" value="TOOL_WINDOW" />
+      </map>
+    </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="2086" y="360" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1600393858388">
+      <screen x="1440" y="23" width="1852" height="1057" />
+    </state>
+    <state x="2086" y="360" key="#com.intellij.fileTypes.FileTypeChooser/1440.23.1852.1057/0.23.1440.877@1440.23.1852.1057" timestamp="1600393858388" />
+    <state x="1540" y="123" width="1652" height="857" key="DiffContextDialog" timestamp="1600393863602">
+      <screen x="1440" y="23" width="1852" height="1057" />
+    </state>
+    <state x="1540" y="123" width="1652" height="857" key="DiffContextDialog/1440.23.1852.1057/0.23.1440.877@1440.23.1852.1057" timestamp="1600393863602" />
+    <state x="2073" y="306" width="586" height="490" key="find.popup" timestamp="1600394481888">
+      <screen x="1440" y="23" width="1852" height="1057" />
+    </state>
+    <state x="2073" y="306" width="586" height="490" key="find.popup/1440.23.1852.1057/0.23.1440.877@1440.23.1852.1057" timestamp="1600394481888" />
     <state x="2031" y="258" width="670" height="676" key="search.everywhere.popup" timestamp="1600389061867">
       <screen x="1440" y="23" width="1852" height="1057" />
     </state>
