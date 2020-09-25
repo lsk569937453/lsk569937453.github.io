@@ -34,7 +34,7 @@
   <component name="ChangeListManager">
     <list default="true" id="949a50f5-8352-4290-838a-94ff3b864eed" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2020-09-23-druid-load-class.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2020-09-23-druid-load-class.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2020-09-18-druid-connect-fail.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2020-09-18-druid-connect-fail.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,9 +50,10 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_MARK_IGNORED_FILES_AS_EXCLUDED" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../dal-new" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -68,7 +69,11 @@
       <option name="presentableId" value="Default" />
       <updated>1600865579183</updated>
       <workItem from="1600865580337" duration="3309000" />
-      <workItem from="1600871011197" duration="2709000" />
+      <workItem from="1600871011197" duration="2767000" />
+      <workItem from="1600955222651" duration="7000" />
+      <workItem from="1600955420462" duration="391000" />
+      <workItem from="1601039500993" duration="221000" />
+      <workItem from="1601039732011" duration="30000" />
     </task>
     <servers />
   </component>

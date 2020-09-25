@@ -68,7 +68,7 @@ at com.ly.dal.manager.TransactionContextManager.doGetRealConnection(TransactionC
 ... 101 more
 ```
 
-区别就在于：**故障机器一直没有socket的异常，无论是连接失败还是连接reset，都会抛出异常，而故障机器确没有。**
+区别就在于：**故障机器一直没有socket的异常，无论是连接失败还是连接reset，都会抛出异常，而故障机器却没有。**
 由于业务方直接将应用重启了，没有现场，于是上网搜了一下有没有别人碰到这种错误，找到一篇类似的[博客](https://www.jianshu.com/p/3c85c9ddffd3)  。  
 ## 问题复现
 正常应用服务器通过druid连接mysql，复现场景如下：  
@@ -83,7 +83,7 @@ chaosBlade可以模拟断网操作，丢包率，网卡包损坏等，具体的[
 ```
 blade create network loss --percent 90 --interface eth0 --remote-port 3022
 ```
-由于我是在应用法机器上做的混沌实验，所以这里设置的是远程端口的丢包率，3022就是我mysql的机器的端口。  
+由于我是在应用方机器上做的混沌实验，所以这里设置的是远程端口的丢包率，3022就是我mysql的机器的端口。  
 然后我们在用[阿尔萨斯](https://github.com/alibaba/arthas/blob/master/README_CN.md)  看一下具体的线程状态.  
 <!--![RUNOOB](../assets/images/druid-1.png) -->
 ![RUNOOB](https://lsk569937453.github.io/assets/images/druid-1.png)
