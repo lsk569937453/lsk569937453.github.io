@@ -217,7 +217,7 @@ font:
   #LinkLabel: Link
 social:
   GitHub: https://github.com/lsk569937453
-  Linked: https://www.linkedin.com/in/shikai-liu-22412812a/
+  LinkedIn: https://www.linkedin.com/in/shikai-liu-22412812a/
 
 
 # Social Links Icons
@@ -232,7 +232,7 @@ social_icons:
   GitHub: github
   Twitter: twitter
   Weibo: weibo
-  Linked: linkedin-in
+  LinkedIn: linkedin
 
 
 # Sidebar Avatar
