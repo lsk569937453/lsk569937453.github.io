@@ -1,16 +1,16 @@
 ---
-title: Druid 在故障恢复后无法连接到mysql数据库
-description: mysql机器故障恢复后，druid需要重启才能恢复正常
+title: Druid unable to connect to mysql database after failback
+description: After the mysql machine fails to recover, druid needs to be restarted to return to normal
 categories:
  - tutorial
 tags:
 - Mysql
 - Java
 ---
-## 问题描述
-**应用底层通过druid连接mysql数据库，故障时mysql进程异常，值班运维执行了mysql进程重启，网卡reset
-等操作，发现应用方8台机器，只有一半恢复了正常,另外的机器需要重启应用才能恢复正常**  
-正常的机器在恢复前报错如下：
+## Problem Description
+**The bottom layer of the application connects to the mysql database through druid. When the fault occurs, the mysql process is abnormal. The on-duty operation and maintenance executes the mysql process restart and the network card reset.
+Waiting for the operation, it is found that only half of the 8 machines on the application side have returned to normal, and the other machines need to restart the application to return to normal.**  
+The normal machine reports the following error before recovery：
 ```
 ... 101 more\nCaused by: com.alibaba.druid.pool.GetConnectionTimeoutException: wait millis 3000, active 1, maxActive 100, creating 1
 	at com.alibaba.druid.pool.DruidDataSource.getConnectionInternal(DruidDataSource.java:1510)
@@ -57,7 +57,7 @@ The last packet sent successfully to the server was 0 milliseconds ago. The driv
 	at com.mysql.jdbc.MysqlIO.readPacket(MysqlIO.java:560)
 	... 15 more
 ```
-异常的机器一直报错如下：
+The abnormal machine has been reporting the following error:
 ```
 Caused by: com.alibaba.druid.pool.GetConnectionTimeoutException: wait millis 3000, active 1, maxActive 100, creating 1
 at com.alibaba.druid.pool.DruidDataSource.getConnectionInternal(DruidDataSource.java:1512)
@@ -68,42 +68,45 @@ at com.ly.dal.manager.TransactionContextManager.doGetRealConnection(TransactionC
 ... 101 more
 ```
 
-区别就在于：**故障机器一直没有socket的异常，无论是连接失败还是连接reset，都会抛出异常，而故障机器却没有。**
-由于业务方直接将应用重启了，没有现场，于是上网搜了一下有没有别人碰到这种错误，找到一篇类似的[博客](https://www.jianshu.com/p/3c85c9ddffd3)  。  
-## 问题复现
-正常应用服务器通过druid连接mysql，复现场景如下：  
-1.断网。断开应用和mysql的联网，然后过一段时间重新连接，可以连上  
-2.重启mysql进程。  
-3.mysql机器网卡重启。  
+The difference is：**The faulty machine has no socket exceptions. Whether it is a connection failure or a connection reset, an exception will be thrown, but the faulty machine does not.**
+Since the business side restarted the application directly, there was no scene, so I searched the Internet to see if anyone else encountered this kind of error, and found a similar article
+[blog](https://www.jianshu.com/p/3c85c9ddffd3)  。  
+## Problem recurrence
+The normal application server connects to mysql through druid, and the reproduction scene is as follows:
+1.disconnected. Disconnect the application and mysql from the Internet, and then reconnect after a period of time, you can connect
+2.Restart the mysql process.
+3.The network card of the mysql machine is restarted.
 
-以上三种方法都无法将问题复现。  
-此时只能寄出大杀器阿里的混沌工具[chaosBlade](https://github.com/chaosblade-io/chaosblade)  。  
-chaosBlade可以模拟断网操作，丢包率，网卡包损坏等，具体的[教程在此](https://chaosblade-io.gitbook.io/chaosblade-help-zh-cn/blade-create-network-corrupt)  。  
-我当时试了好多方法，终于在丢包率设置90%的时候，将错误复现了，我们把丢包率恢复正常后，应用并不能恢复正常。
+None of the above three methods can reproduce the problem.
+At this time, only the Chaos Tool of Ali, the big killer, can be sent.[chaosBlade](https://github.com/chaosblade-io/chaosblade)  。  
+chaosBladeIt can simulate network disconnection operation, packet loss rate, network card packet damage, etc.[Tuturial](https://chaosblade-io.gitbook.io/chaosblade-help-zh-cn/blade-create-network-corrupt)  。  
+I tried a lot of methods at the time, and finally when the packet loss rate was set to 90%, the error was reproduced. After we returned the packet loss rate to normal, the application did not return to normal.
 ```
 blade create network loss --percent 90 --interface eth0 --remote-port 3022
 ```
-由于我是在应用方机器上做的混沌实验，所以这里设置的是远程端口的丢包率，3022就是我mysql的机器的端口。  
-然后我们在用[阿尔萨斯](https://github.com/alibaba/arthas/blob/master/README_CN.md)  看一下具体的线程状态.  
+Since I did the chaos experiment on the application machine, the packet loss rate of the remote port is set here, and 3022 is the port of my mysql machine.
+Then we are using [arthas](https://github.com/alibaba/arthas/blob/master/README_CN.md)  Look at the specific thread status.
 <!--![RUNOOB](../assets/images/druid-1.png) -->
 ![RUNOOB](https://lsk569937453.github.io/assets/images/druid-1.png)
-可以看到有两个Druid-ConnectionPool-Create 的线程，因为我们有两个db需要连接，所以有两个druid连接池，因此有两个创建连接的线程。  
+You can see that there are two threads of Druid-ConnectionPool-Create, because we have two dbs that need to be connected, so there are two druid connection pools, so there are two threads that create connections.
+  
 
-看一下两个线程的线程栈信息：
+Take a look at the thread stack information of the two threads:
 <!--![RUNOOB](../assets/images/druid-2.png) -->
 ![RUNOOB](https://lsk569937453.github.io/assets/images/druid-2.png)
 
-第一个线程是有问题的线程,可以看到当前的线程状态是Runnable。java doc上是这么说Runnable状态的
-
-**处于 runnable 状态下的线程正在 Java 虚拟机中执行，但它可能正在等待来自于操作系统的其它资源，比如处理器。**  
-
-即当前的线程是在运行中的，一直执行socket.read。我们都知道socket是tcp协议栈的实现，在server异常关闭的情况下，会发送fin包/reset包，客户端收到这两种类型的包，才会关闭。那么问题肯定是故障
-时（mysql进程重启/网卡reset）时，client没收到包，就一直卡在这里了。
+The first thread is the thread in question, you can see that the current thread state is Runnable. This is what the java doc says about the Runnable state
 
 
-第二个线程是正常的线程，一直在wait直到有信号将他唤醒来创建连接。
+**A thread in the runnable state is executing in the Java virtual machine, but it may be waiting for other resources from the operating system, such as a processor.**  
 
-## 源码分析  
+That is, the current thread is running, always executing socket.read. We all know that socket is the implementation of the tcp protocol stack. In the case of abnormal shutdown of the server, the fin packet/reset packet will be sent, and the client will only close after receiving these two types of packets. Then the problem must be a malfunction
+
+
+
+The second thread is a normal thread, waiting until a signal wakes it up to create a connection.
+
+## Source code analysis
 
 ```
 public class CreateConnectionThread extends Thread {
@@ -145,13 +148,13 @@ public class CreateConnectionThread extends Thread {
                     }
 
                     if (emptyWait) {
-                        // 必须存在线程等待，才创建连接
+                        // There must be a thread waiting to create a connection
                         if (poolingCount >= notEmptyWaitThreadCount //
                                 && !(keepAlive && activeCount + poolingCount < minIdle)) {
                             empty.await();
                         }
 
-                        // 防止创建超过maxActive数量的连接
+                       // Prevent the creation of more than maxActive connections
                         if (activeCount + poolingCount >= maxActive) {
                             empty.await();
                             continue;
@@ -227,11 +230,12 @@ public class CreateConnectionThread extends Thread {
         }
     }
 ```
-CreateConnectionThread的源码可以看到，为了避免在创建连接的时候开启新的线程/线程池,这里是用了一个死循环在做这个事。如果有信号将其唤醒，那么就会去创建新的线程。创建完之后就进入下一个循环，即等待新的信号将其唤醒创建连接。  
-我们的程序必须重启才可以解决问题，是因为CreateConnectionThread卡在了创建连接的这一步，可以从问题复现看到socket.read这一步看到我们的程序一直卡在这里了。所以问题就是我们在创建连接的时候没有设置超时时间吗？答案确实是没有设置。  
-其实druid的报错信息已经能看到我们创建连接的url是这个：
+As you can see from the source code of CreateConnectionThread, in order to avoid opening a new thread/thread pool when creating a connection, an infinite loop is used to do this. If there is a signal to wake it up, it will create a new thread. After the creation, it enters the next loop, that is, waiting for a new signal to wake it up to create a connection.
+
+Our program must be restarted to solve the problem, because CreateConnectionThread is stuck in the step of creating a connection. You can see the socket.read step from the reproduction of the problem to see that our program has been stuck here. So the question is don't we set a timeout when creating the connection? The answer is indeed not set.
+
 ```
 jdbc:mysql://xx.xx.xx.xx:3027/xx?useUnicode=true&characterEncoding=utf8&autoReconnect=true
 ```
-## 解决方案  
-在设置druid连接池的时候设置一下**connectTimeout,socketTimeout**。
+## Solution
+Set it when setting up the druid connection pool **connectTimeout,socketTimeout**。

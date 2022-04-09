@@ -1,6 +1,8 @@
 ---
-title: mysql连接池满了无法释放
-description: 应用连接数据库中间件，数据库中间件连接mysql,mysql故障后恢复正常，业务方无法恢复
+title: The connection pool(Mysql) is full and cannot be released
+
+description: The application connects to the database middleware, and the database middleware connects to mysql. After mysql fails, it returns to normal, but the business side cannot recover.
+
 categories:
  - tutorial
 tags:
@@ -8,8 +10,8 @@ tags:
 - Java
 
 ---
-## 问题描述
-**应用连接数据库中间件，数据库中间件连接mysql,mysql故障后恢复正常，业务方无法恢复，报错如下**   
+## Problem Description
+**The application connects to the database middleware, and the database middleware connects to mysql. After mysql fails, it returns to normal, but the business side cannot recover. The error is as follows**   
 ```
 ### Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Could not get JDBC Connection; nested exception is org.apache.tomcat.jdbc.pool.PoolExhaustedException: [Thread-1391] Timeout: Pool empty. Unable to fetch a connection in 0 seconds, none available[size:30; busy:30; idle:0; lastwait:20].
 	at org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:23)
@@ -38,12 +40,13 @@ Caused by: org.apache.tomcat.jdbc.pool.PoolExhaustedException: [Thread-1391] Tim
 	at org.springframework.jdbc.datasource.DataSourceUtils.getConnection(DataSourceUtils.java:77)
 	... 13 more
 ``` 
-## 解决方案  
-在构建连接池的时候设置一下**removeAbandoned,removeAbandonedTimeout**。
+## Solution  
+Set param when building the connection pool
+**removeAbandoned,removeAbandonedTimeout**。
 ``` 
-#是否自动回收超时连接 
+#Whether to automatically recycle timeout connections
 dataSource.removeAbandoned=true 
 
-#超时时间(以秒数为单位) 
+#timeout (in seconds)
 dataSource.removeAbandonedTimeout=180
 ``` 

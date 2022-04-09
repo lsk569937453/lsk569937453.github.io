@@ -1,43 +1,51 @@
 ---
-title: chaosBlade的相关指令
-description: blade的相关指令
+title: Instructions of ChaosBlade
+description: Instructions of Blade
 categories:
  - tutorial
 tags:
 - Chaos
 ---
-## 模拟网络故障
-##### 禁止访问远端3022端口
+## Simulate network failure
+##### Forbid access to remote port 3022
+
 ``` 
 blade create network drop --remote-port 3022
 ``` 
-##### 禁止访问本地3022端口
+##### Disable access to local port 3022
+
 ``` 
 blade create network drop --local-port 3022
 ``` 
-##### 调用远端3022端口时，设置丢包率90
+##### When calling the remote port 3022, set the packet loss rate to 90
+
 ``` 
 blade create network loss --interface eth0 --percent 90 --remote-port 3022
 ```  
-##### 网卡的网络延时3s(所有网络，包括ssh)
+##### The network delay of the network card is 3s (all networks, including ssh)
+
 ``` 
 blade create network delay --interface eth0 --time 3000
 ```
 
-## 模拟io故障
-##### 模拟io故障
+## Simulate io failure
+
+##### Simulate io failure
+
 ``` 
 blade create disk burn --write --read  --size 10 --count 1024  --timeout 300
 ```
 
-## 其他
+## Other
 
-##### 删除某个实验
+##### delete an experiment
+
 ``` 
 blade destroy uid
 ``` 
 
-##### 查询创建过的混沌实验
+##### Querying Chaos Experiments Created
+
 ``` 
 blade status --type create
 ``` 

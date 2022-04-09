@@ -27,7 +27,7 @@ My current computer configuration is 8GB RAM and dual core cpu.I set the coreSiz
 ## Use Memory Mapped File
 The first time I knew Memory Mapped File is the advantage of **Kakfa**.Why do the kafka have a vey good write performace?Because when  the producer send the message to kafka,kafka write the message to memory without to write the message to disk directly.If the size of message increase to the size of page size,the system will flush the memory to disk automaticlly.
 
-So I use the **MappedByteBuffer**which is offered by JDK1.8 to write file.The code is like that:
+So I use the **MappedByteBuffer** which is offered by JDK1.8 to write file.The code is like that:
 ```
   RandomAccessFile file = new RandomAccessFile(otherFolder, "rw");
   MappedByteBuffer out = file.getChannel().map(FileChannel.MapMode.READ_WRITE, 0, Integer.MAX_VALUE);

@@ -1,7 +1,8 @@
 ---
-title: Druid getConnection 卡住  
+title: Druid getConnection stuck
 
-description: 高并发下druid getConnection 卡住
+
+description: Druid getConnection stuck under high concurrency
 
 categories:
  - tutorial  
@@ -12,15 +13,16 @@ tags:
  - Java  
   
 ---
-## 故障复原  
-  业务方在低并发的时候能正常通过druid访问mysql,并发上来后访问mysql会出现卡住的情况。
-  通过[阿尔萨斯](https://arthas.aliyun.com/doc/en/quick-start.html)   查看一下线程情况   
+## Background
+  The business side can normally access mysql through druid when the concurrency is low, and the access to mysql will be stuck after the concurrency is up.
+  With [Arthas](https://arthas.aliyun.com/doc/en/quick-start.html) Check out the thread
+  
   ![Runable](https://lsk569937453.github.io/assets/images/druid-2020-09-23.png)
-可以看到我们消费MQ用的四个线程有两个已经Blocked了,我们在使用
+It can be seen that two of the four threads we use to consume MQ have been Blocked, and we are using
 ```
 thread threadId -b 
 ```
-查看一下我们的线程究竟是卡在哪里了。下面是我们的线程栈：
+See where exactly our thread is stuck. Here is our thread stack:
 ```
 "ConsumeMessageThread_2" Id=73 BLOCKED on java.lang.Object@491bf991 owned by "ConsumeMessageThread_4" Id=75
     at java.lang.ClassLoader.loadClass(ClassLoader.java:404)
@@ -35,13 +37,14 @@ thread threadId -b
     at com.alibaba.druid.pool.DruidDataSource.getConnection(DruidDataSource.java:1225)
     at com.alibaba.druid.pool.DruidDataSource.getConnection(DruidDataSource.java:90)
 ```
-## 源码分析
-1407的代码是这个，
+## Source code analysis
+The code for 1407 is below,
+
 ```
  if (valid && isMySql)  // unexcepted branch
                     long lastPacketReceivedTimeMs = MySqlUtils.getLastPacketReceivedTimeMs(conn);
 ```
-继续往下跟进一下，看一下getLastPacketReceivedTimeMs 这个方法
+Continue to follow up and take a look at the method getLastPacketReceivedTimeMs
 ```
 public static long getLastPacketReceivedTimeMs(Connection conn) throws SQLException {
         if (class_connectionImpl == null && !class_connectionImpl_Error) {
@@ -52,9 +55,9 @@ public static long getLastPacketReceivedTimeMs(Connection conn) throws SQLExcept
             }
         }
 ```
-可以看到如果要进这个Utils.loadClass的话，必须要class_connectionImpl==null,并且class_connectionImpl_Error为false。我又跟进了一下，发现
-Utils.loadClass这行代码一直返回null，所以每次都会进getLastPacketReceivedTimeMs这个逻辑。为什么会每次都为空呢？
-继续跟进看一下Utils.loadClass这个方法
+
+It can be seen that if you want to enter this Utils.loadClass, you must have class_connectionImpl==null, and class_connectionImpl_Error is false. I followed up again and found  Utils.loadClass always returns null, so the logic of getLastPacketReceivedTimeMs is entered every time. Why is it null every time?
+Continue to follow up and take a look at the method Utils.loadClass
 ```
 public static Class<?> loadClass(String className) {
         Class<?> clazz = null;
@@ -81,19 +84,22 @@ public static Class<?> loadClass(String className) {
         return clazz;
     }
 ```
-可以看到如果这个class在当前包下面找不到，异常就会被吞，则该方法返回空。众所周知，mysql的driver class有两个:  
-   
+It can be seen that if the class is not found under the current package, the exception will be swallowed, and the method will return empty. As we all know, there are two mysql driver classes:
+
+```
    mysql-connector-java 5:com.mysql.jdbc.Driver   
    
    mysql-connector-java 6:com.mysql.cj.jdbc.Driver  
+```
+The driver com.mysql.cj.jdbc.Driver is used in our program, so the class com.mysql.jdbc.MySQLConnection cannot be loaded all the time. Every time you get a connection, you will enter this method to loadClass.
 
-我们程序中使用的是com.mysql.cj.jdbc.Driver这个驱动，从而这个类com.mysql.jdbc.MySQLConnection就一直加载不到。每次获取连接都会进这个方法去loadClass。
-而loadClass这个方法天生就是同步的，所以并发上来后，性能就会急剧下降。所以解决方案就是将驱动的className以及驱动jar包换一下即可,即降级到com.mysql.jdbc.Driver
-这个驱动。
+The loadClass method is inherently synchronous, so after the concurrency comes up, the performance will drop sharply. So the solution is to change the className of the driver and the driver jar package, that is, downgrade to com.mysql.jdbc.Driver
+this driver.
 
-## 解决方案
+
+## Solution
 mysql-driver-class: com.mysql.jdbc.Driver 
-驱动jar换成下面的驱动即可 
+The driver jar can be replaced with the following driver
 ```
 <dependency>
 	<groupId>mysql</groupId>
