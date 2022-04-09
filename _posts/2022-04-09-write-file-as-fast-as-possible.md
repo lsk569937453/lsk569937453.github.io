@@ -49,12 +49,16 @@ Since our data is byte array. So we could compress the data. And we could write 
 
 ### Optimize the data  ###
 The IP address is the 32-unsigned integer. So we could use 4 bytes to store one IP address. For example,
-|      Integer      |  IP address |
-|:-------------:|------:|
+
+
+| Integer | IP address | 
+|-------|--------|
 |  0 | 0.0.0.0 |
 |  128   |   0.0.0.128 |
 |  256   |   0.0.1.0 |
 |  0x7fffffff |    127.255.255.255 |
+
+
 The convert code is bellowing:
 ```
  public static String ipIntToString(int num) {
