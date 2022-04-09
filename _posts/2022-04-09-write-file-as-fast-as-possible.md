@@ -1,7 +1,7 @@
 ---
 title: How to calculate top 100 from 100M ips(-)-Write File As Fast As Possible
 
-description: Go进程panic
+description: how to write 100M IP addresses as fast as possible
 
 categories:
  - How to calculate top 100 from 100M ips  
@@ -54,7 +54,7 @@ Doubt2:I use single thread to implement that.Could multithread be more faster?
 
 Doubt3:The bottleneck is io, if I use a high-speed disk, will the program become faster?
 
-Doubt4:The MMAP use the virtual memory.It has the in
+Doubt4:The MMAP use the virtual memory.The method is like that.The size is long type.Why the size must be no  greater than Integer.MAX_VALUE?
 ```
 public abstract MappedByteBuffer map(MapMode mode,long position, long size)
 
