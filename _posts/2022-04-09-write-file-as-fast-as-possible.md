@@ -22,7 +22,7 @@ The first way that comes to my mind is to use multithread. So I chose **Guava** 
     for (int i = 0; i < 10*1000*1000; i++)
     charSink.write(CommonUtils.generateIp());
 ```
-My current computer configuration is 8GB RAM and dual core cpu.I set the coreSize and maxCoreSize of the Threadpool to 10. So I can use 10 thread to write the file concurrencyly. The program has been running for 5 minutes and has not finished writing, I think I have to change the method.
+My current computer configuration is 8GB RAM and dual core cpu.I set the coreSize and maxCoreSize of the Threadpool to 10. So I can use 10 thread to write the file concurrencyly. The program has been running for 5 minutes and has not finished writing, I think I have to get a new solution.
 
 ## Use Memory Mapped File
 The first time I knew Memory Mapped File is the advantage of **Kakfa**.Why do the kafka have a vey good write performace?Because when  the producer send the message to kafka,kafka write the message to memory without to write the message to disk directly.If the size of message increase to the size of page size,the system will flush the memory to disk automaticlly.
