@@ -434,10 +434,10 @@ gitalk:
 
 # Share
 #duoshuo_share: true
-
+#<meta name="google-site-verification" content="Fo4K2qKDmdfFDlvNcqGWydeeAlkUYQHfodtsQ3yAz2U" />
 # Google Webmaster tools verification setting
 # See: https://www.google.com/webmasters/
-google_site_verification: IwPEmPQg0V9regPEWh8kZCWrQCZJWSMU9KVqUu_XfxM
+google_site_verification: Fo4K2qKDmdfFDlvNcqGWydeeAlkUYQHfodtsQ3yAz2U
 
 # Google Analytics
 google_analytics: G-075CWG28H0
