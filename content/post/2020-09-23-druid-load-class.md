@@ -1,6 +1,7 @@
 ---
 title: Druid getConnection stuck
 
+date: 2020-09-23T07:07:07+01:00
 
 description: Druid getConnection stuck under high concurrency
 

@@ -1,6 +1,7 @@
 ---
 title: Instructions of ChaosBlade
 description: Instructions of Blade
+date: 2020-09-16T07:07:07+01:00
 categories:
  - tutorial
 tags:

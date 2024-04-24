@@ -1,5 +1,6 @@
 ---
 title: The connection pool(Mysql) is full and cannot be released
+date: 2020-09-17T07:07:07+01:00
 
 description: The application connects to the database middleware, and the database middleware connects to mysql. After mysql fails, it returns to normal, but the business side cannot recover.
 

@@ -3,6 +3,8 @@ title: Druid unable to connect to mysql database after failback
 description: After the mysql machine fails to recover, druid needs to be restarted to return to normal
 categories:
  - tutorial
+date: 2020-09-18T07:07:07+01:00
+
 tags:
 - Mysql
 - Java

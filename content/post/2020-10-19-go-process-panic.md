@@ -2,6 +2,7 @@
 title: Go Process Panic  
 
 description: Go Process Panic
+date: 2020-10-19T07:07:07+01:00
 
 categories:
  - tutorial  
