@@ -1,6 +1,6 @@
 ---
 title: "Bug Maker"
-description: "一个喜欢研究代码的工程师"
+description: "一个喜欢研究代码的工程师,前8年搞Java,现在主要在研究Rust。"
 
 date: 2022-06-09T20:12:52+08:00
 lastmod: 2022-06-09T20:12:52+08:00
