@@ -1,8 +1,5 @@
-_site
-node_modules
-.DS_Store
-*/.DS_Store
-*/*/.DS_Store
-*.sh
-.idea
-.vscode
+# Ignore Hugo resource files
+*.hugo*.lock
+resources/
+public/
+config/development/
